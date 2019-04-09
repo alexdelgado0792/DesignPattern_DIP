@@ -1,5 +1,5 @@
-﻿using System;
-using DemoLibrary;
+﻿using DemoLibrary.Interfaces;
+using System;
 
 namespace ConsoleUI
 {
@@ -7,20 +7,15 @@ namespace ConsoleUI
     {
         public static void Main(string[] args)
         {
-            Person owner = new Person
-            {
-                FirstName = "Ale",
-                LastName = "Del",
-                EmailAddress ="ale@example.com",
-                PhoneNumber = "555-1212"
-            };
+            IPerson owner = Facotory.CreatePerson();
+            owner.FirstName = "Ale";
+            owner.LastName = "Del";
+            owner.EmailAddress = "ale@example.com";
+            owner.PhoneNumber = "555-1212";
 
-            Chore chore = new Chore
-            {
-                ChoreName = "Take out the trash",
-                Owner = owner
-
-            };
+            IChore chore = Facotory.CreateChore();
+            chore.ChoreName = "Take out the trash";
+            chore.Owner = owner;
 
             chore.PerformedWork(3);
             chore.PerformedWork(1.5);
